@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 namespace WestWindConsole.Entities
 {
     // TODO: Begin reviewing entity attributes
-    [Table("Categories")]
+    [Table("Categories", Schema ="dbo")]// dbo is the default
     public class Category
     {
-        [Key]
+        [Key] //  This property/column is a PK in the database
         public int CategoryID { get; set; }
 
         [Required] // Use this for string/varchar columns that are NOT NULL
@@ -27,6 +27,11 @@ namespace WestWindConsole.Entities
         public string PictureMimeType { get; set; }
 
         // TODO: Introducing Navigation Properties
+        // The virutal keyword allows our entity to support
+        // "lazy loading".
+        // The ICollection<T> is an interface data type.
+        // The HashSet<T> is a class that "implements" the
+        // ICollection<T> interface.
         public virtual ICollection<Product> Products { get; set; } =
             new HashSet<Product>();
     }

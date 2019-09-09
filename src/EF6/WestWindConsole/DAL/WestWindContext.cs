@@ -7,13 +7,21 @@ using System.Threading.Tasks;
 using WestWindConsole.Entities;
 
 namespace WestWindConsole.DAL
-{
+{//My database context class is a "virtual represntation"
+    //of the database, with each DbSet<T> property referencing 
+    // a particular table in the the database.
+    // It inherits from DbContext class.
     public class WestWindContext : DbContext
     {
         public WestWindContext() : base("name=WWdb")
         {
             // TODO: Demonstrate null database initializer
+            // Tells Entity Framework it should NOT create any tables 
+            // in the database on my behalf.
+            //(null == no initializer)
             Database.SetInitializer<WestWindContext>(null);
+            // An alternative to this would be to disable database
+            // initialization in the .config file
         }
 
         public DbSet<Product> Products { get; set; }
