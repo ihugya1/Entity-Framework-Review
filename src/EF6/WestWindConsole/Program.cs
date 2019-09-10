@@ -48,7 +48,10 @@ namespace WestWindConsole
                     case 8:
                         DisplayShippers();
                         break;
-                    // TODO: Practice - Display methods for remaining tables
+                    case 9:
+                        DisplayBuildVersions();
+                        break;
+                        // TODO: Practice - Display methods for remaining tables
                 }
                 Pause();
             } while (menuChoice > 0 && menuChoice <= 15);
@@ -147,6 +150,15 @@ namespace WestWindConsole
                 Console.WriteLine($"There are {count} products");
             }
         }
+        private void DisplayBuildVersions()
+        {
+            using (var context = new WestWindContext())
+            {
+                int count = context.BuildVersions.Count();
+                // $ - String Interpolation
+                Console.WriteLine($"There are {count} build versions");
+            }
+        }
 
         private int ChooseTable()
         {
@@ -158,6 +170,7 @@ namespace WestWindConsole
             Console.WriteLine("6) Employee Territories");
             Console.WriteLine("7) Shipments");
             Console.WriteLine("8) Shippers");
+            Console.WriteLine("9) Build versions");
             // TODO: Practice - Menu options for remaining tables
 
             Console.Write("Select a table (or 0 to exit): ");
